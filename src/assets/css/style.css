@@ -1033,7 +1033,7 @@ File: scss
   .topbar .navbar-collapse {
     padding: 0 10px; }
   .topbar .top-navbar {
-    min-height: 70px;
+    height: 70px;
     padding: 0px; }
     .topbar .top-navbar .dropdown-toggle::after {
       display: none; }
@@ -1046,6 +1046,8 @@ File: scss
         padding-top: 0px; }
         .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
           display: none; }
+        .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
+           margin: 0px 0px 0px 35px; }
         .topbar .top-navbar .navbar-header .navbar-brand b {
           line-height: 70px;
           display: inline-block; }
@@ -1055,7 +1057,7 @@ File: scss
       font-size: 17px;
       line-height: 54px; }
     .topbar .top-navbar .navbar-nav > .nav-item > span {
-      line-height: 65px;
+      height: 65px;
       font-size: 24px;
       font-weight: 500;
       color: #ffffff;
