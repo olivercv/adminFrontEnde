@@ -5,12 +5,19 @@ import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 
 
+// Services
+import { ServiceModule } from './services/service.module';
+
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -23,8 +30,10 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ServiceModule,
     PagesModule,
-    MatSliderModule
+    MatSliderModule,
+    FormsModule
 
 
   ],
