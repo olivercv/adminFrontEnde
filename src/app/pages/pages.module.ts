@@ -15,6 +15,8 @@ import { pagesRoutes } from './pages.routes';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { ServiceModule } from '../services/service.module';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 
@@ -25,7 +27,9 @@ import { ServiceModule } from '../services/service.module';
     ProgressComponent,
     Graficas1Component,
     GraficoDonaComponent,
-    AccoutSettingsComponent
+    AccoutSettingsComponent,
+    PromesasComponent,
+    RxjsComponent
   ],
   imports: [
     CommonModule,
