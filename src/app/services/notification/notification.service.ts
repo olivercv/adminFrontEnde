@@ -43,7 +43,6 @@ export class NotificationService {
 
     let uri = this.url + '/notification/' + id;
     uri += '?token=' + this.userService.token;
-
     return this.http.delete( uri ).pipe(
       map( resp => {
         alert('Notificación Borrada');
@@ -62,13 +61,9 @@ export class NotificationService {
   }
 
   saveNotification( notification: Notification ) {
-
-    const params = JSON.stringify(notification);
-
     let uri = this.url + '/notification';
     uri += '?token=' + this.userService.token;
-
-    return this.http.post( uri, params).pipe(
+    return this.http.post( uri, notification).pipe(
         map( (resp: any) => {
           alert('Se ha creado una notificación');
           return resp.notification;

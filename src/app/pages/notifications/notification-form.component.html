@@ -1,8 +1,8 @@
-<div class="row" >
+<div class="row animated fadeIn" >
     <div class="col-md-6">
         <div class="card card-body">
             <h3 class="box-title m-b-0">Formulario de registro de Notificaciones</h3>
-            <p class="text-muted m-b-30 font-13"> Registrar notificación web </p>
+            <p class="text-muted m-b-30 font-13"> Registrar notificación web {{modalUploadService.hide}}</p>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate  (ngSubmit)="saveNotification(f)" >
@@ -12,17 +12,17 @@
                         </div>
                         <div class="form-group">
                             <label>Descripción</label>
-                            <input [(ngModel)]="notification.description" name="description" type="text" class="form-control"  placeholder="Descripcion de la notificación">
+                            <textarea [(ngModel)]="notification.description" name="description" class="form-control" rows="5" placeholder="Descripcion de la notificación"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <input [(ngModel)]="notification.date" name="date" type="date" class="form-control" placeholder="mm/dd/yyyy">
+                                <input [(ngModel)]="notification.date" name="date" type="date" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Tipo</label>
                             <select [(ngModel)]="notification.type" name="type" class="form-control" required>
-                                <option value="" >Seleccionar un tipo</option>
+                                <option value="0" >Seleccionar un tipo</option>
                                 <option *ngFor="let type of types" [value]="type.value" > 
                                     {{type.viewValue}}
                                 </option>
@@ -45,18 +45,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3" >
+    <div class="col-md-6" *ngIf="notification._id"  >
         <div class="card card-body">
             <h4 class="box-title m-b-0" >Imagen Publicada</h4>
-            <img src="" alt="">
+            <img (click)="changePhoto()" [src]="notification.image | image: 'notification'" class="img img-fluid pointer">
         </div>
     </div>
 
-    <div class="col-md-3" >
-        <div class="card card-body">
-            <h4 class="box-title m-b-0" >Imagen</h4>
-            <img src="" alt="">
-        </div>
-        
-    </div>
+    
 </div>

@@ -30,6 +30,10 @@ export class UsersComponent implements OnInit {
     this.modalUploadService.showModal( 'users', id );
   }
 
+  closeModal() {
+    this.modalUploadService.hideModal();
+  }
+
   getUsers() {
     this.loading = true;
     this.userService.getUsers( this.to)

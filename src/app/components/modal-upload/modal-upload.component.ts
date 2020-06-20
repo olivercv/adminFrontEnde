@@ -9,33 +9,31 @@ import { ModalUploadService } from './modal-upload.service';
 })
 export class ModalUploadComponent implements OnInit {
 
-  // hide: string = 'hide';
+
   imageUpload: File;
   imageTemp: any;
 
   constructor(
     public uploadFileService: UploadFileService,
     public modalUploadService: ModalUploadService
-  ) { }
+  ) {
 
-  ngOnInit(): void {
-    console.log('valor de la variable ', this.modalUploadService.hide);
-  }
 
-  // openModal(type: string, id: string) {
-  //   this.modalUploadService.showModal(type, id);
-  // }
+   }
+
+  ngOnInit(): void {}
 
   closeModal() {
     this.imageTemp = null;
     this.imageUpload = null;
-
     this.modalUploadService.hideModal();
+
   }
 
   selectImage( file: File ) {
 
     if ( !file) {
+      alert('Solo puede subir imagenes');
       this.imageUpload = null;
       return;
     }

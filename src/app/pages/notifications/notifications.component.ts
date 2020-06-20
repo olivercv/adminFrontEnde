@@ -24,7 +24,6 @@ export class NotificationsComponent implements OnInit {
   getNotifications() {
     this.notificationService.getNotifications( this.to)
     .subscribe( (notifications) => {
-      console.log('deberia tener las notificaciones', notifications);
       if(notifications) {
         this.total = notifications.length;
       }

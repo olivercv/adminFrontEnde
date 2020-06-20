@@ -58,12 +58,9 @@
                             
                             <td>
                                 <span *ngIf="noti.active" class="label label-table label-inverse">Activo</span>
-                                <span *ngIf="!noti.active" class="label label-table label-light-primary">Inactivo</span>
-                                
+                                <span *ngIf="!noti.active" class="label label-table label-light-primary">Inactivo</span>   
                             <td>
-       
-
-                                <button [routerLink]="['/notification',noti._id]" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </button>
+                                <a [routerLink]="['/notification',noti._id]" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </a>
                                 <button (click)="deleteNotification(noti)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
 
                             </td>
