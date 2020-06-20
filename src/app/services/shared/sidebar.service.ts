@@ -14,11 +14,18 @@ export class SidebarService {
         { titulo: 'Progress', url: '/progress'},
         { titulo: 'Gráficas', url: '/graficas1'},
         { titulo: 'Promesas', url: '/promesas'},
-        { titulo: 'RxJs', url: '/rxjs'},
-        { titulo: 'cosa', url: '/rxjs'}
+        { titulo: 'RxJs', url: '/rxjs'}
+      ]
+    },
+    {
+      titulo: 'Manteninimientos',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        {titulo: 'Usuarios', url: '/users'},
+        {titulo: 'Publicaciones', url: '/publications'},
+        {titulo: 'Notificaciones', url: '/notifications'}
       ]
     }
   ];
-  
   constructor() { }
 }

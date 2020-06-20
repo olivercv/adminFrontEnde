@@ -10,3 +10,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .topbar .top-navbar .navbar-header {
     line-height: 70px;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.w70 {
+    width: 70px;
+}
+.img-50 {
+    width: 50px;
+}
+
+.hiide {
+    display: none;
+}
+
+.balck-cover {
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}

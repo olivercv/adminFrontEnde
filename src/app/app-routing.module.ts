@@ -5,6 +5,7 @@ import { PagesComponent } from './pages/pages.component';
 import { LoginComponent } from './login/login.component';
 import { NopageFoundComponent } from './shared/nopage-found/nopage-found.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginGuardGuard } from './services/service.index';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: PagesComponent,
+    canActivate: [ LoginGuardGuard ],
     children: [{
       path: '',
       loadChildren: './pages/pages.module#PagesModule'

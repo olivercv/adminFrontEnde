@@ -4,33 +4,71 @@
     <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/background/login-register.jpg);">
         <div class="login-box card">
             <div class="card-body">
-                <form class="form-horizontal form-material" (ngSubmit)="ingresar()">
+                
+                <form  [formGroup]="registration" (ngSubmit) = "registerUser()" class="form-horizontal form-material" >
                     <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo.png" width="250px" alt="Home" /></a>
                     <h3 class="box-title m-t-40 m-b-0">Registrate</h3><small>Formulario para la creación de usuarios nuevos</small>
-                    <div class="form-group m-t-20">
+                    <div class="form-group m-t-20 ">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Nombre">
+                            <input formControlName="name" name="name" class="form-control" type="text" required placeholder="Nombre">
+                            <span class="help-block" *ngIf="registration.get('name').hasError('required') && registration.get('name').touched">
+                                <p class="text-danger"> Debe ingresar su nombre </p>
+                            </span>
+                            <span class="help-block" *ngIf="registration.get('name').hasError('minlength') && registration.get('name').touched">
+                                <p class="text-danger"> EL nombre debe contener al menos 5 digitos!</p>
+                            </span>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input formControlName="email" name="email" class="form-control" type="text" required placeholder="Correo electrónico">
+                            <span class="form-group" *ngIf="registration.get('email').hasError('required') && registration.get('email').touched">
+                                <p class="text-danger"> Debe ingresar un email </p>
+                            </span>
+                            <span class="form-group" *ngIf="registration.get('email').hasError('email') && registration.get('email').touched">
+                                <p class="text-danger"> ingrese un email válido!</p>
+                            </span>
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Correo electrónico">
+                            <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contrasena">
+                            <span class="form-group" *ngIf="registration.get('password').hasError('required') && registration.get('password').touched">
+                                <p class="text-danger"> Debe ingresar la contraseña </p>
+                            </span>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="password" required="" placeholder="Contrasena">
-                        </div>
-                    </div>
+                    
+
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="password" required="" placeholder="Confirmar contrasena">
+                            <input formControlName="password2" name="password2" class="form-control" type="password" required="" placeholder="Confirmar contrasena">
                         </div>
                     </div>
+                 
+
+                    <div class="form-group" *ngIf="registration.get('password2').hasError('minlength') && registration.get('password2').touched">
+                        <p class="text-danger"> La contraseña debe contener al menos 6 digitos!</p>
+                      </div>
+              
+                        <div class="form-group" *ngIf="(registration.get('password2').hasError('equalTo') || registration.get('password2').hasError('required') ) && registration.get('password2').touched">
+              
+                          <span *ngIf="registration.get('password2').hasError('required') && registration.get('password2').touched">
+                              <p class="text-danger"> Debe ingresar la contraseña de confirmación</p>
+                        </span>
+                          <span *ngIf="registration.get('password2').hasError('equalTo') && registration.get('password2').touched">
+                              <p class="text-danger"> Las contraseñas no coinciden</p>
+                          </span>
+                        </div>
+
+                 
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="checkbox checkbox-primary p-t-0">
-                                <input id="checkbox-signup" type="checkbox">
+                                <input formControlName="conditions" name="conditions" id="checkbox-signup" type="checkbox">
                                 <label for="checkbox-signup"> Acepto los  <a href="#">Terminos de contrato</a></label>
                             </div>
                         </div>
@@ -42,7 +80,7 @@
                     </div>
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
-                            <p>Usted ya tiene cuenta? <a [routerLink]="['/login']" class="text-info m-l-5"><b>Atentificación</b></a></p>
+                            <p>Usted ya tiene cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Atentificación</b></a></p>
                         </div>
                     </div>
                 </form>

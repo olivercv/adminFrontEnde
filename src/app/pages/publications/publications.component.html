@@ -1,0 +1,95 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="searchPublication(input.value)" type="text" class="form-control" placeholder="Buscar Publicación ..." >
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn"  *ngIf="loading" >
+    <div class="col-sm-12" >
+        <div class="alert alert-warning text-center" >
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x" ></i>
+            <br>
+            <span>Espere por favor</span>
+    
+    
+        </div> 
+
+    </div>
+    
+</div>
+
+<div class="row animated fadeIn" *ngIf="!loading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right" >
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary" >
+                        <i class="fa fa-plus" ></i>  
+                        Adicionar Publicación
+                    </button>
+                </div>
+                
+                
+
+                <table class="table m-t-20  table-striped table-hover contact-list footable-loaded footable color-table inverse-table" >
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Fecha</th>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>activo</th>
+                            <th style="width: 150px;" ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let publi of publications" >
+                            <td class="w70" >
+                                <img  [src]="publi.image | image: 'publication'" alt="" class="img-50">
+                            </td>
+                            <td>{{publi.date | date}}</td>
+                            <td>{{publi.title}}</td>
+                            <td>{{publi.category}}</td>
+                            
+                            <td>
+                                <span *ngIf="publi.active" class="label label-table label-inverse">Activo</span>
+                                <span *ngIf="!publi.active" class="label label-table label-light-primary">Inactivo</span>
+                                
+                            <td>
+       
+
+                                <button (click)="editPublication(publi)" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </button>
+                                <button (click)="deletePublication(publi)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" >Publiicaciones registradas ( <small>{{total}}</small> ) </td>
+                            <td colspan="2" ></td>
+                            <td colspan="2" >
+                                <button (click)="changePagination(-5)" class="btn btn-secondary" >
+                                    Anteriores
+                                </button>
+            
+                                <button (click)="changePagination(5)" class="btn btn-secondary" >
+                                    Siguientes
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+                    
+            </div>
+        </div>
+    </div>
+</div>
