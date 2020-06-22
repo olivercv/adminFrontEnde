@@ -11,7 +11,7 @@ export class NotificationsComponent implements OnInit {
   loading = true;
   total = 0;
   notifications: Notification[] = [];
-  to: number;
+  to = 0;
 
   constructor(
       public notificationService: NotificationService
@@ -22,10 +22,12 @@ export class NotificationsComponent implements OnInit {
   }
 
   getNotifications() {
+    this.loading = true;
     this.notificationService.getNotifications( this.to)
     .subscribe( (notifications) => {
+
       if(notifications) {
-        this.total = notifications.length;
+        this.total = this.notificationService.total;
       }
       this.notifications = notifications;
       this.loading = false;
@@ -53,10 +55,8 @@ export class NotificationsComponent implements OnInit {
   }
 
   changePagination( value: number) {
-
     const to = this.to + value;
     // console.log( to );
-
     if (to >= this.total) {
       return;
     }
@@ -64,11 +64,7 @@ export class NotificationsComponent implements OnInit {
     if ( to < 0) {
       return;
     }
-
     this.to += value;
-
-    this.getNotifications ();
-
-
+    this.getNotifications();
   }
 }

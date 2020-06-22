@@ -39,6 +39,8 @@ export class NotificationService {
     );
   }
 
+
+
   deleteNotification( id: string) {
 
     let uri = this.url + '/notification/' + id;
@@ -62,13 +64,30 @@ export class NotificationService {
 
   saveNotification( notification: Notification ) {
     let uri = this.url + '/notification';
-    uri += '?token=' + this.userService.token;
-    return this.http.post( uri, notification).pipe(
-        map( (resp: any) => {
-          alert('Se ha creado una notificación');
-          return resp.notification;
-        })
-    );
+
+    if ( notification._id ) {
+      uri += '/' + notification._id;
+      uri += '?token=' + this.userService.token;
+
+      return this.http.put( uri, notification ).pipe(
+              map( ( resp: any ) => {
+                alert('La notiificación se actualizó correctamente' + notification.title);
+                return resp.notification;
+
+              })
+      );
+
+    } else {
+      // crea la notificación
+      uri += '?token=' + this.userService.token;
+      return this.http.post( uri, notification).pipe(
+          map( (resp: any) => {
+            alert('Se ha creado una notificación');
+            return resp.notification;
+          })
+      );
+
+    }
 
   }
 

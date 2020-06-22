@@ -1,1 +1,79 @@
-<p>publication-form works!</p>
+<div class="row animated fadeIn" >
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Formulario de registro de Publicaciones</h3>
+            <p class="text-muted m-b-30 font-13"> Registrar publicación web</p>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate  (ngSubmit)="savePublication(f)" >
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            <input [(ngModel)]="publication.title" name="title"  type="text" class="form-control"  placeholder="Titulo de la Publicación" requiired>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea [(ngModel)]="publication.description" name="description" class="form-control" rows="5" placeholder="Descripcion de la Publicación"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select [(ngModel)]="publication.category" name="category" class="form-control" required>
+                                <option value="" >Seleccionar una categoría</option>
+                                <option *ngFor="let category of categories" [value]="category._id" > 
+                                    {{category.name}}
+                                </option>
+                            </select>
+                        </div>
+           
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select [(ngModel)]="publication.type" name="type" class="form-control" required>
+                                <option value="0" >Seleccionar un tipo</option>
+                                <option *ngFor="let type of types" [value]="type.value" > 
+                                    {{type.viewValue}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" >
+                                <div class="col-sm" style="margin: 10px;">
+                                    <mat-checkbox [(ngModel)]="publication.active" name="active">Activo</mat-checkbox>
+                                </div>
+                                <div class="col-sm" >
+                                    <mat-form-field>
+                                        <mat-label>Seleccione una fecha</mat-label>
+                                        <input [(ngModel)]="publication.date" name="date" matInput [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            
+                        
+
+                            
+
+                           
+
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">
+                            <i class="fa fa-save" ></i>
+                            Guardar
+                        </button>
+                        <button routerLink="/publications" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" *ngIf="publication._id"  >
+        <div class="card card-body">
+            <h4 class="box-title m-b-0" >Imagen Publicada</h4>
+            <img (click)="changePhoto()" [src]="publication.image | image: 'publication'" class="img img-fluid pointer">
+        </div>
+    </div>
+
+    
+</div>
+

@@ -8,7 +8,6 @@ import { UserService } from '../user/user.service';
 import { Publication } from '../../models/publication.model';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,15 +23,6 @@ export class PublicationService {
     this.url = GLOBAL.urlServices;
    }
 
-   getStorage() {
-    if ( localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
-      this.user = JSON.parse(localStorage.getItem('user'));
-    } else {
-      this.token = '';
-      this.user = null;
-    }
-  }
 
   getPublications( to: number = 0 ) {
     const uri = this.url + '/publication?to=' + to;
@@ -55,9 +45,11 @@ export class PublicationService {
 
     let uri = this.url + '/publication/' + id;
     uri += '?token=' + this.userService.token;
-
     return this.http.delete( uri ).pipe(
-      map( resp => alert('Publicación Borrada') )
+      map( resp => {
+        alert('Publicación Borrada');
+        return resp;
+      })
     );
   }
 
@@ -72,14 +64,31 @@ export class PublicationService {
 
   savePublication( publication: Publication ) {
 
-    const params = JSON.stringify(publication);
-
     let uri = this.url + '/publication';
-    uri += '?token=' + this.userService.token;
 
-    return this.http.post( uri, params).pipe(
-        map( (resp: any) => resp.publication )
-    );
+    if ( publication._id ) {
+      uri += '/' + publication._id;
+      uri += '?token=' + this.userService.token;
+
+      return this.http.put( uri, publication ).pipe(
+              map( ( resp: any ) => {
+                alert('La publicación se actualizó correctamente' + publication.title);
+                return resp.publication;
+
+              })
+      );
+
+    } else {
+      // crea la notificación
+      uri += '?token=' + this.userService.token;
+      return this.http.post( uri, publication).pipe(
+          map( (resp: any) => {
+            alert('Se ha creado una publicación');
+            return resp.publication;
+          })
+      );
+
+    }
 
   }
 

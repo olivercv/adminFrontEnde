@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user/user.service';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { ModalUploadComponent } from 'src/app/components/modal-upload/modal-upload.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var swal: any;
 
@@ -18,7 +20,10 @@ export class UsersComponent implements OnInit {
   total = 0;
   loading = true;
 
-  constructor( public userService: UserService, public modalUploadService: ModalUploadService) { }
+  constructor(  public userService: UserService, 
+                public modalUploadService: ModalUploadService,
+                public dialog: MatDialog
+                ) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -27,12 +32,11 @@ export class UsersComponent implements OnInit {
   }
 
   showModal( id: string) {
+    this.dialog.open(ModalUploadComponent);
     this.modalUploadService.showModal( 'users', id );
   }
 
-  closeModal() {
-    this.modalUploadService.hideModal();
-  }
+ 
 
   getUsers() {
     this.loading = true;

@@ -11,6 +11,8 @@ import { PublicationsComponent } from './publications/publications.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PublicationFormComponent } from './publications/publication-form.component';
 import { NotificationFormComponent } from './notifications/notification-form.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryFormComponent } from './category/category-form.component';
 
 
 export const pagesRoutes: Routes = [
@@ -25,6 +27,8 @@ export const pagesRoutes: Routes = [
           { path: 'users', component: UsersComponent, data: {titulo: 'Mantenimiento de usuarios'}  },
           { path: 'publications', component: PublicationsComponent, data: {titulo: 'Publicaciones web'}  },
           { path: 'publication/:id', component: PublicationFormComponent, data: {titulo: 'Formulario de publicación de noticias'}  },
+          { path: 'categories', component: CategoryComponent, data: {titulo: 'Categorías de las publiicaciones'}  },
+          { path: 'category/:id', component: CategoryFormComponent, data: {titulo: 'Formulario de manteniimiineto de categorías'} },
           { path: 'notifications', component: NotificationsComponent, data: {titulo: 'Notificaciones web'}  },
           { path: 'notification/:id', component: NotificationFormComponent, data: {titulo: 'Formulario de notificaciones web'}  },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

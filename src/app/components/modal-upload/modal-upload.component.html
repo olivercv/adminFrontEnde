@@ -1,27 +1,15 @@
-<div class="balck-cover animated fadeIn" [ngClass]="modalUploadService.hide ">
+<h1 mat-dialog-title>Subir Imagen</h1>
 
-<div class="modal" style="display: block;" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Cargar una imagen</h5>
-          <button (click)="closeModal()"  type="button" class="close"  aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center "  >
+<div mat-dialog-content>
 
-            <img *ngIf="!imageTemp" [src]="'x' | image" class="w150" alt="">
-            <img *ngIf="imageTemp" [src]="imageTemp" class="w150" alt="">
-            <input (change)="selectImage($event.target.files[0])" type="file">
-        
-        
-        </div>
-        <div class="modal-footer">
-          <button (click)="uploadImage()" [disabled]="!imageTemp"  type="button" class="btn btn-primary">Subir imagen</button>
-          <button (click)="closeModal()" type="button" class="btn btn-secondary" >Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <img *ngIf="!imageTemp" [src]="'x' | image" class="w150" alt="">
+  <img *ngIf="imageTemp" [src]="imageTemp" class="w150" alt="">
+  <input (change)="selectImage($event.target.files[0])" type="file">
+
 </div>
+<div mat-dialog-actions>
+  <button (click)="uploadImage()" [disabled]="!imageTemp" mat-button mat-dialog-close > Subir imagen</button>
+  <button (click)="closeModal()" mat-button mat-dialog-close>Cerrar</button>
+</div>
+
+

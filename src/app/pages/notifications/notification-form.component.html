@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="card card-body">
             <h3 class="box-title m-b-0">Formulario de registro de Notificaciones</h3>
-            <p class="text-muted m-b-30 font-13"> Registrar notificación web {{modalUploadService.hide}}</p>
+            <p class="text-muted m-b-30 font-13"> Registrar notificación web</p>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate  (ngSubmit)="saveNotification(f)" >
@@ -14,11 +14,7 @@
                             <label>Descripción</label>
                             <textarea [(ngModel)]="notification.description" name="description" class="form-control" rows="5" placeholder="Descripcion de la notificación"></textarea>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input [(ngModel)]="notification.date" name="date" type="date" class="form-control">
-                            </div>
-                        </div>
+           
                         <div class="form-group">
                             <label>Tipo</label>
                             <select [(ngModel)]="notification.type" name="type" class="form-control" required>
@@ -29,13 +25,29 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <div class="checkbox checkbox-success">
-                                <input [(ngModel)]="notification.active" name="active" type="checkbox" >
-                                <label for="checkbox1"> Activo </label>
+                            <div class="row" >
+                                <div class="col-sm" style="margin: 10px;">
+                                    <mat-checkbox [(ngModel)]="notification.active" name="active">Activo</mat-checkbox>
+                                </div>
+                                <div class="col-sm" >
+                                    <mat-form-field>
+                                        <mat-label>Seleccione una fecha</mat-label>
+                                        <input [(ngModel)]="notification.date" name="date" matInput [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
+                                </div>
                             </div>
+                            
+                        
+
+                            
+
+                           
+
                         </div>
                         
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">
                             <i class="fa fa-save" ></i>
                             Guardar
                         </button>

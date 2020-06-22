@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup)="searchPublication(input.value)" type="text" class="form-control" placeholder="Buscar Publicación ..." >
+                <input #input (keyup)="searchCategory(input.value)" type="text" class="form-control" placeholder="Buscar Categoría ..." >
             </div>
         </div>
     </div>
@@ -30,9 +30,9 @@
             <div class="card-body">
 
                 <div class="text-right" >
-                    <button [routerLink]="['/publication','new']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" >
+                    <button [routerLink]="['/category','new']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" >
                         <i class="fa fa-plus" ></i>  
-                        Adicionar Publicación
+                        Adicionar Categoría
                     </button>
                 </div>
                 
@@ -41,39 +41,27 @@
                 <table class="table m-t-20  table-striped table-hover contact-list footable-loaded footable color-table inverse-table" >
                     <thead>
                         <tr>
-                            <th>Foto</th>
-                            <th>Fecha</th>
-                            <th>Título</th>
-                            <th>Categoría</th>
-                            <th>activo</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
                             <th style="width: 150px;" ></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let publi of publications" >
-                            <td class="w70" >
-                                <img  [src]="publi.image | image: 'publication'" alt="" class="img-50">
-                            </td>
-                            <td>{{publi.date | date}}</td>
-                            <td>{{publi.title}}</td>
-                            <td>{{publi.category}}</td>
+                        <tr *ngFor="let cat of categories" >
                             
+                            <td>{{cat.name}}</td>
+                            <td>{{cat.description}}</td>
                             <td>
-                                <span *ngIf="publi.active" class="label label-table label-inverse">Activo</span>
-                                <span *ngIf="!publi.active" class="label label-table label-light-primary">Inactivo</span>
-                                
-                            <td>
-       
-
-                                <button [routerLink]="['/publication',publi._id]" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </button>
-                                <button (click)="deletePublication(publi)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
+                            
+                                <a [routerLink]="['/category',cat._id]" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </a>
+                                <button (click)="deleteCategory(cat)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
 
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="5" ><strong>Registros </strong>  5 de {{total}} </td>
+                            <td colspan="2" ><strong>Registros </strong>  5 de {{total}} </td>
                             <td colspan="1" class="text-center" >
                                 <button (click)="changePagination(-5)" class="btn btn-xs btn-secondary m-r-10" >
                                     <i class="fa fa-chevron-left" ></i>

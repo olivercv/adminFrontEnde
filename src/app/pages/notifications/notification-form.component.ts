@@ -4,6 +4,8 @@ import { NotificationService } from '../../services/notification/notification.se
 import { Notification } from '../../models/notification.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalUploadComponent } from 'src/app/components/modal-upload/modal-upload.component';
 
 
 @Component({
@@ -14,9 +16,10 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 export class NotificationFormComponent implements OnInit {
 
   public types = [
-    {value: '1', viewValue: 'Tipo 1'},
-    {value: '2', viewValue: 'Tipo 2'},
-    {value: '3', viewValue: 'Tipo 3'}
+    {value: '1', viewValue: 'Urgente'},
+    {value: '2', viewValue: 'Moderado'},
+    {value: '3', viewValue: 'Normal'},
+    {value: '4', viewValue: 'Información'}
   ];
 
   notification: Notification = new Notification('', new Date() , '', '', true, 0, 1, '');
@@ -25,7 +28,8 @@ export class NotificationFormComponent implements OnInit {
     public notificationService: NotificationService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public modalUploadService: ModalUploadService
+    public modalUploadService: ModalUploadService,
+    public dialog: MatDialog
   ) {
 
     activatedRoute.params.subscribe( params => {
@@ -39,6 +43,10 @@ export class NotificationFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.modalUploadService.modalNotification
+        .subscribe( resp => {
+          this.notification.image = resp.notification.image;
+        });
   }
 
   saveNotification( f: NgForm ) {
@@ -64,7 +72,8 @@ export class NotificationFormComponent implements OnInit {
 
   changePhoto() {
 
-    this.modalUploadService.showModal( 'notification', this.notification._id );
+    this.dialog.open(ModalUploadComponent);
+    this.modalUploadService.showModal( 'notifications', this.notification._id );
 
     this.modalUploadService.modalNotification
                 .subscribe( resp => {

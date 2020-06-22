@@ -10,11 +10,11 @@ export class SidebarService {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        { titulo: 'Dashboard', url: '/dashboard'},
-        { titulo: 'Progress', url: '/progress'},
-        { titulo: 'Gráficas', url: '/graficas1'},
-        { titulo: 'Promesas', url: '/promesas'},
-        { titulo: 'RxJs', url: '/rxjs'}
+        { titulo: 'Dashboard', url: '/dashboard'}
+        // { titulo: 'Progress', url: '/progress'},
+        // { titulo: 'Gráficas', url: '/graficas1'},
+        // { titulo: 'Promesas', url: '/promesas'},
+        // { titulo: 'RxJs', url: '/rxjs'}
       ]
     },
     {
@@ -22,8 +22,9 @@ export class SidebarService {
       icono: 'mdi mdi-folder-lock-open',
       submenu: [
         {titulo: 'Usuarios', url: '/users'},
+        {titulo: 'Notificaciones', url: '/notifications'},
         {titulo: 'Publicaciones', url: '/publications'},
-        {titulo: 'Notificaciones', url: '/notifications'}
+        {titulo: 'Categorías', url: '/categories'}
       ]
     }
   ];

@@ -12,7 +12,7 @@ export class PublicationsComponent implements OnInit {
   loading = true;
   total = 0;
   publications: Publication[] = [];
-  to: number;
+  to = 0;
 
   constructor(
         public publicationService: PublicationService
@@ -23,15 +23,25 @@ export class PublicationsComponent implements OnInit {
   }
 
   getPublications() {
-
+    this.loading = true;
     this.publicationService.getPublications( this.to)
     .subscribe( (publications: Publication[]) => {
-      console.log(publications);
-      this.total = publications.length;
+      if(publications) {
+        this.total = this.publicationService.total;
+      }
       this.publications = publications;
       this.loading = false;
     });
   }
+
+
+  deletePublication( publication: Publication ) {
+
+    this.publicationService.deletePublication( publication._id )
+            .subscribe ( () => this.getPublications() );
+
+  }
+
 
   searchPublication( term: string ) {
 
@@ -45,21 +55,9 @@ export class PublicationsComponent implements OnInit {
 
   }
 
-  editPublication( publication: Publication ) {
-
-  }
-  deletePublication( publication: Publication ) {
-
-    this.publicationService.deletePublication( publication._id )
-            .subscribe ( () => this.getPublications() );
-
-  }
-
   changePagination( value: number) {
-
     const to = this.to + value;
     // console.log( to );
-
     if (to >= this.total) {
       return;
     }
@@ -67,12 +65,8 @@ export class PublicationsComponent implements OnInit {
     if ( to < 0) {
       return;
     }
-
     this.to += value;
-
-    this.getPublications ();
-
-
+    this.getPublications();
   }
 
 }

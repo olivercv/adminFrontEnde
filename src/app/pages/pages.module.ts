@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
+import {DemoMaterialModule} from './material.module';
+
 // pipes module
 import { PipesModule } from '../pipes/pipes.module';
 
@@ -28,6 +30,9 @@ import { PublicationsComponent } from './publications/publications.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PublicationFormComponent } from './publications/publication-form.component';
 import { NotificationFormComponent } from './notifications/notification-form.component';
+import { DialogComponent } from '../components/dialog/dialog.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoryFormComponent } from './category/category-form.component';
 
 
 
@@ -48,10 +53,14 @@ import { NotificationFormComponent } from './notifications/notification-form.com
     NotificationsComponent,
     PublicationFormComponent,
     NotificationFormComponent,
+    DialogComponent,
+    CategoryComponent,
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    DemoMaterialModule,
     FormsModule,
     RouterModule.forChild(pagesRoutes),
     ChartsModule,

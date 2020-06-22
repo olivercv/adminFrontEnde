@@ -1,9 +1,4 @@
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: js
-*/
+function initMenu(){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(['jquery'], factory);
@@ -340,3 +335,4 @@ File: js
     return AdminMenu;
   }(jQuery);
 });
+}

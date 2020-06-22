@@ -11,12 +11,14 @@ export class ImagePipe implements PipeTransform {
     let url = GLOBAL.urlServices + '/image';
 
     if (!image) {
+
+      console.log('estro');
       return url + '/users/noImage';
     }
 
-    if (image.indexOf('https') >= 0 ) {
-        return image;
-    }
+    // if (image.indexOf('https') >= 0 ) {
+    //     return image;
+    // }
 
     switch( type ) {
 
@@ -35,7 +37,6 @@ export class ImagePipe implements PipeTransform {
         break;
 
     }
-
     return url;
   }
 
