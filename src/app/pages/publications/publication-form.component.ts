@@ -25,7 +25,7 @@ export class PublicationFormComponent implements OnInit {
     {value: '4', viewValue: 'Información'}
   ];
 
-  publication: Publication = new Publication('', new Date() , '', '', '', true, 0, 1, '');
+  publication: Publication = new Publication('', new Date() , '', '', '', '', true, 0, 1, '');
   constructor(
           public publicationService: PublicationService,
           public modalUploadService: ModalUploadService,
@@ -33,11 +33,11 @@ export class PublicationFormComponent implements OnInit {
           public dialog: MatDialog,
           public router: Router,
           public activatedRoute: ActivatedRoute
-  ) { 
+  ) {
 
     activatedRoute.params.subscribe( params => {
       const id = params['id'];
-      console.log('identificador ', id);
+      // console.log('identificador ', id);
       if ( id !== 'new') {
         this.getPublication( id );
       }

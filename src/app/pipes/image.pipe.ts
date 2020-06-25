@@ -12,7 +12,7 @@ export class ImagePipe implements PipeTransform {
 
     if (!image) {
 
-      console.log('estro');
+      // console.log('estro');
       return url + '/users/noImage';
     }
 

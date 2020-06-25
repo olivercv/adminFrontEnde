@@ -7,6 +7,7 @@ export class Notification {
         public active: boolean,
         public type?: number,
         public order?: number,
-        public image?: string
+        public image?: string,
+        public sfile?: string
     ) {}
 }

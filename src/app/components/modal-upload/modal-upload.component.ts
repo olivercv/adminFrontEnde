@@ -31,7 +31,7 @@ export class ModalUploadComponent implements OnInit {
   }
 
   selectImage( file: File ) {
-
+    console.log('srchivo', file);
     if ( !file) {
       alert('Solo puede subir imagenes');
       this.imageUpload = null;

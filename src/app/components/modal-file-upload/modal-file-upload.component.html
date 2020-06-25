@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Subir un archivo</h1>
+
+<div mat-dialog-content>
+
+  <img *ngIf="iconFile" [src]="iconFile" class="w150" alt="">
+  <input (change)="selectFile($event.target.files[0])" type="file">
+
+</div>
+<div mat-dialog-actions>
+  <button (click)="uploadFile()"  mat-button mat-dialog-close > Subir Archivo</button>
+  <button (click)="closeModal()" mat-button mat-dialog-close >Cerrar</button>
+</div>

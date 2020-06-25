@@ -34,6 +34,12 @@
                                 </option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>Enlace externo</label>
+                            <input [(ngModel)]="publication.lnk" name="lnk"  type="text" class="form-control"  placeholder="Enlace externo de la nota" requiired>
+                        </div>
+
                         <div class="form-group">
                             <div class="row" >
                                 <div class="col-sm" style="margin: 10px;">
@@ -48,13 +54,6 @@
                                       </mat-form-field>
                                 </div>
                             </div>
-                            
-                        
-
-                            
-
-                           
-
                         </div>
                         
                         <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">

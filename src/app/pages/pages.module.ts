@@ -33,6 +33,7 @@ import { NotificationFormComponent } from './notifications/notification-form.com
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryFormComponent } from './category/category-form.component';
+import { ModalFileUploadComponent } from '../components/modal-file-upload/modal-file-upload.component';
 
 
 
@@ -49,6 +50,7 @@ import { CategoryFormComponent } from './category/category-form.component';
     ProfileComponent,
     UsersComponent,
     ModalUploadComponent,
+    ModalFileUploadComponent,
     PublicationsComponent,
     NotificationsComponent,
     PublicationFormComponent,

@@ -1,5 +1,5 @@
 <div class="row animated fadeIn" >
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card card-body">
             <h3 class="box-title m-b-0">Formulario de registro de Notificaciones</h3>
             <p class="text-muted m-b-30 font-13"> Registrar notificación web</p>
@@ -38,13 +38,6 @@
                                       </mat-form-field>
                                 </div>
                             </div>
-                            
-                        
-
-                            
-
-                           
-
                         </div>
                         
                         <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">
@@ -57,10 +50,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6" *ngIf="notification._id"  >
+    <div class="col-md-4" *ngIf="notification._id"  >
         <div class="card card-body">
-            <h4 class="box-title m-b-0" >Imagen Publicada</h4>
+            <h4 class="box-title m-b-10" >Imagen Publicada</h4>
             <img (click)="changePhoto()" [src]="notification.image | image: 'notification'" class="img img-fluid pointer">
+        </div>
+
+        <div class="card card-body" >
+            <h4 class="box-title m-b-20" >Archivo publicado</h4>
+            <img (click)="changeFile()" [src]="iconFile" width="100px" alt="Subir imagen" style="margin: 0 auto;" />
+            
         </div>
     </div>
 
