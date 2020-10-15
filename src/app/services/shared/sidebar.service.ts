@@ -24,7 +24,8 @@ export class SidebarService {
         {titulo: 'Usuarios', url: '/users'},
         {titulo: 'Notificaciones', url: '/notifications'},
         {titulo: 'Publicaciones', url: '/publications'},
-        {titulo: 'Categorías', url: '/categories'}
+        {titulo: 'Categorías', url: '/categories'},
+        {titulo: 'Convocatorias', url: '/convocatories'}
       ]
     }
   ];

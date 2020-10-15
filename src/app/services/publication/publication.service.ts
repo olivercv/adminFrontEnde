@@ -12,9 +12,10 @@ import { Publication } from '../../models/publication.model';
   providedIn: 'root'
 })
 export class PublicationService {
-
+  limit = 8;
+  page = 1;
+  pages = 0;
   total = 0;
-
   public token;
   user: User;
   public url: string;
@@ -23,11 +24,24 @@ export class PublicationService {
     this.url = GLOBAL.urlServices;
    }
 
+   pagination( page: number) {
 
-  getPublications( to: number = 0 ) {
-    const uri = this.url + '/publication?to=' + to;
+    console.log('pagina recibida', page );
+    console.log('total', this.pages );
+    if (page > this.pages) { return; }
+    if (page <= 0) { return; }
+    this.page =  page;
+  }
+
+  getPublications( page: number = 1 , limit: number = 5 ) {
+    let uri = this.url + '/publication?page=' + page ;
+    if( limit !== 5) {
+      uri = uri + '&limit=' + limit;
+    }
+    console.log('url enviada', uri);
     return this.http.get( uri ).pipe(
       map( ( resp: any ) => {
+          this.pages = resp.pages;
           this.total = resp.total;
           return resp.publications;
       })

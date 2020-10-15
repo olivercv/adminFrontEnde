@@ -13,6 +13,9 @@ import { PublicationFormComponent } from './publications/publication-form.compon
 import { NotificationFormComponent } from './notifications/notification-form.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryFormComponent } from './category/category-form.component';
+import { ConvocatoryComponent } from './convocatory/convocatory.component';
+import { ConvocatoryFormComponent } from './convocatory/convocatory-form.component';
+import { RoleGuard } from '../services/guards/role.guard';
 
 
 export const pagesRoutes: Routes = [
@@ -24,13 +27,15 @@ export const pagesRoutes: Routes = [
           { path: 'account-settings', component: AccoutSettingsComponent, data: {titulo: 'Ajustes del tema'}  },
           { path: 'profile', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}  },
           // Mantenimientos
-          { path: 'users', component: UsersComponent, data: {titulo: 'Mantenimiento de usuarios'}  },
-          { path: 'publications', component: PublicationsComponent, data: {titulo: 'Publicaciones web'}  },
-          { path: 'publication/:id', component: PublicationFormComponent, data: {titulo: 'Formulario de publicación de noticias'}  },
-          { path: 'categories', component: CategoryComponent, data: {titulo: 'Categorías de las publiicaciones'}  },
-          { path: 'category/:id', component: CategoryFormComponent, data: {titulo: 'Formulario de manteniimiineto de categorías'} },
-          { path: 'notifications', component: NotificationsComponent, data: {titulo: 'Notificaciones web'}  },
-          { path: 'notification/:id', component: NotificationFormComponent, data: {titulo: 'Formulario de notificaciones web'}  },
+          { path: 'users', component: UsersComponent, canActivate: [RoleGuard] , data: { privileges: ['ADMIN_ROLE'], titulo: 'Mantenimiento de usuarios'}  },
+          { path: 'publications', component: PublicationsComponent, canActivate: [RoleGuard], data: { privileges: ['PUBLI_ROLE', 'ADMIN_ROLE'], titulo: 'Publicaciones web'}  },
+          { path: 'publication/:id', component: PublicationFormComponent, canActivate: [RoleGuard], data: { privileges: ['PUBLI_ROLE', 'ADMIN_ROLE'], titulo: 'Formulario de publicación de noticias'}  },
+          { path: 'categories', component: CategoryComponent, canActivate: [RoleGuard], data: { privileges: ['ADMIN_ROLE'],titulo: 'Categorías de las publiicaciones'}  },
+          { path: 'category/:id', component: CategoryFormComponent, canActivate: [RoleGuard], data: { privileges: ['ADMIN_ROLE'], titulo: 'Formulario de manteniimiineto de categorías'} },
+          { path: 'notifications', component: NotificationsComponent, canActivate: [RoleGuard], data: { privileges: ['PUBLI_ROLE', 'ADMIN_ROLE'], titulo: 'Notificaciones web'}  },
+          { path: 'notification/:id', component: NotificationFormComponent, canActivate: [RoleGuard], data: { privileges: ['PUBLI_ROLE', 'ADMIN_ROLE'], titulo: 'Formulario de notificaciones web'}  },
+          { path: 'convocatories', component: ConvocatoryComponent, canActivate: [RoleGuard], data: { privileges: ['CONV_ROLE','ADMIN_ROLE'], titulo: 'Convocatorias web'}  },
+          { path: 'convocatory/:id', component: ConvocatoryFormComponent, canActivate: [RoleGuard], data: { privileges: ['CONV_ROLE','ADMIN_ROLE'],titulo: 'Formulario de convocatorias web'}  },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

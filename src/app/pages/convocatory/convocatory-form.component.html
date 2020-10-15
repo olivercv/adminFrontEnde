@@ -1,0 +1,140 @@
+<div class="row animated fadeIn" >
+
+  <div class="col-md-6">
+      <div class="card card-body">
+
+
+          <h3 class="box-title m-b-0">Formulario de registro de Convocatorias</h3>
+          <p class="text-muted m-b-30 font-13"> Registrar Convocatoria web</p>
+          <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                  <form #f="ngForm" ngNativeValidate  (ngSubmit)="guardarConvocatory(f)" >
+                    <div class="form-group">
+                      <label class="control-label">Objeto</label>
+                      <input [(ngModel)]="convocatory.titulo" name="titulo" type="text" class="form-control" placeholder="Convocatoria">
+                      <small class="form-control-feedback"> Titulo de la convocatoria </small>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm" >
+                        <mat-form-field>
+                            <mat-label>Fecha de Invitacion</mat-label>
+                            <input [(ngModel)]="convocatory.fecha_invitacion" name="fecha_invitacion" matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                      <!--/span-->
+                      <div class="col-sm" >
+                        <mat-form-field>
+                            <mat-label>Fecha de Presentacion</mat-label>
+                            <input [(ngModel)]="convocatory.fecha_presentacion" name="fecha_presentacion" matInput [matDatepicker]="picker1">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                      <!--/span-->
+                    </div>
+                    <div class="row">
+                      <div class="col-sm" >
+                        <mat-form-field>
+                            <mat-label>Fecha de Ampliacion</mat-label>
+                            <input [(ngModel)]="convocatory.fecha_ampliacion" name="fecha_ampliacion" matInput [matDatepicker]="picker2">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                      <!--/span-->
+                      <div class="col-sm" >
+                        <mat-form-field>
+                            <mat-label>Fecha de Consultas</mat-label>
+                            <input [(ngModel)]="convocatory.fecha_consultas" name="fecha_consultas" matInput [matDatepicker]="picker3">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                      <!--/span-->
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm">
+                      <div class="form-group">
+                        <label>Estado</label>
+                        <select class="form-control custom-select" [(ngModel)]="convocatory.estado" name="estado">
+                            <option>--Seleccione el estado--</option>
+                            <option>Vigente</option>
+                            <option>Adjudicado</option>
+                            <option>Anulado</option>
+                            <option>Desierto</option>
+                        </select>
+                      </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-sm">
+                        <div class="form-group">
+                          <label>Correo</label>
+                          <input [(ngModel)]="convocatory.correo" name="correo" type="text" class="form-control" placeholder="">
+                          <small class="form-control-feedback"> Correo Asociado a la Convocatoria </small>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+
+                      <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">
+                          <i class="fa fa-save" ></i>
+                          Guardar
+                      </button>
+                      <button routerLink="/convocatories" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                  </form>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card card-body" *ngIf="convocatory._id">
+      <h3 class="card-title">Documentos</h3>
+      <div class="text-right" >
+        <button (click)="guardarDoc(convocatory._id)" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" >
+            <i class="fa fa-plus" ></i>
+            Adicionar Documento
+        </button>
+      </div>
+
+      <table class="table m-t-20  table-striped table-hover contact-list footable-loaded footable color-table inverse-table">
+          <thead>
+              <tr>
+                  <th>Archivo</th>
+                  <th>Titulo</th>
+
+                  <th>Guardar</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of docs">
+
+              <ng-container *ngIf="doc.convocatory === convocatory._id">
+                <td class="w70" >
+                  {{changeIcon(doc.sfile)}}
+                  <img (click)="changeFile(doc._id )" [src]="iconFile" width="35px" alt="Subir imagen" style="margin: 0 auto;" />
+                </td>
+                <td>
+                  <input [(ngModel)]="doc.titulo" name="titulo" type="text" class="form-control" placeholder="Nombre del Documento">
+
+                </td>
+                <td>
+
+
+                  <button (click)="guardarDocumento( doc )" class="btn btn-primary m-r-10"  > <i class="fa fa-save"></i> </button>
+                  <button (click)="deleteDoc(doc)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
+
+              </td>
+              </ng-container>
+
+            </tr>
+          </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>

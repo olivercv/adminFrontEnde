@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Notification } from '../../models/notification.model';
 import { NotificationService } from '../../services/notification/notification.service';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',

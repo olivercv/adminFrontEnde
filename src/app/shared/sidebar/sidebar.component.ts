@@ -3,6 +3,7 @@ import { SidebarService , UserService} from '../../services/service.index';
 import { User } from '../../models/user.model';
 import * as $ from 'jquery';
 import * as jQuery from 'jquery';
+import { RoleGuard } from '../../services/guards/role.guard';
 
 declare function initMenu();
 

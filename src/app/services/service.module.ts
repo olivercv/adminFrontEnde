@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SettingsService, SidebarService, SharedService, UserService, LoginGuardGuard, PublicationService, NotificationService } from './service.index';
 import { UploadFileService } from './upload-file/upload-file.service';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
+import { ConvocatoryService } from './convocatory/convocatory.service';
 
 
 
@@ -22,6 +23,7 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
     UserService,
     PublicationService,
     NotificationService,
+    ConvocatoryService,
     LoginGuardGuard,
     UploadFileService,
     ModalUploadService

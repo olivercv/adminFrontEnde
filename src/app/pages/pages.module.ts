@@ -33,7 +33,10 @@ import { NotificationFormComponent } from './notifications/notification-form.com
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryFormComponent } from './category/category-form.component';
+import { ConvocatoryFormComponent } from './convocatory/convocatory-form.component';
+import { ConvocatoryComponent } from './convocatory/convocatory.component';
 import { ModalFileUploadComponent } from '../components/modal-file-upload/modal-file-upload.component';
+
 
 
 
@@ -58,6 +61,8 @@ import { ModalFileUploadComponent } from '../components/modal-file-upload/modal-
     DialogComponent,
     CategoryComponent,
     CategoryFormComponent,
+    ConvocatoryComponent,
+    ConvocatoryFormComponent
   ],
   imports: [
     CommonModule,

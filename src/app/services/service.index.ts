@@ -2,6 +2,7 @@ export { LoginGuardGuard } from './guards/login-guard.guard';
 export { UserService } from './user/user.service';
 export { PublicationService } from './publication/publication.service';
 export { NotificationService } from './notification/notification.service';
+export { ConvocatoryService } from './convocatory/convocatory.service';
 
 export { UploadFileService } from './upload-file/upload-file.service';
 export { SettingsService } from './settings/settings.service';

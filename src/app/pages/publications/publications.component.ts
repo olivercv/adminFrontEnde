@@ -12,7 +12,7 @@ export class PublicationsComponent implements OnInit {
   loading = true;
   total = 0;
   publications: Publication[] = [];
-  to = 0;
+  
 
   constructor(
         public publicationService: PublicationService
@@ -24,7 +24,7 @@ export class PublicationsComponent implements OnInit {
 
   getPublications() {
     this.loading = true;
-    this.publicationService.getPublications( this.to)
+    this.publicationService.getPublications( this.publicationService.page, this.publicationService.limit)
     .subscribe( (publications: Publication[]) => {
       if(publications) {
         this.total = this.publicationService.total;
@@ -55,17 +55,12 @@ export class PublicationsComponent implements OnInit {
 
   }
 
+ 
   changePagination( value: number) {
-    const to = this.to + value;
-    // console.log( to );
-    if (to >= this.total) {
-      return;
-    }
 
-    if ( to < 0) {
-      return;
-    }
-    this.to += value;
+    const page = this.publicationService.page + value;
+    this.publicationService.pagination(page);
+
     this.getPublications();
   }
 

@@ -1,0 +1,89 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <input #input (keyup)="searchConvocatory(input.value)" type="text" class="form-control" placeholder="Buscar Publicación ..." >
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn"  *ngIf="loading" >
+  <div class="col-sm-12" >
+      <div class="alert alert-warning text-center" >
+          <strong>Cargando</strong>
+          <br>
+          <i class="fa fa-refresh fa-spin fa-2x" ></i>
+          <br>
+          <span>Espere por favor</span>
+
+
+      </div>
+
+  </div>
+
+</div>
+
+<div class="row animated fadeIn" *ngIf="!loading">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+
+              <div class="text-right" >
+                  <button [routerLink]="['/convocatory','new']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary" >
+                      <i class="fa fa-plus" ></i>
+                      Adicionar Convocatoria
+                  </button>
+              </div>
+
+
+
+              <table class="table m-t-20  table-striped table-hover contact-list footable-loaded footable color-table inverse-table" >
+                  <thead>
+                      <tr>
+
+                          <th>Fecha</th>
+                          <th>Título</th>
+                          <th>Correo</th>
+                          <th>Estado</th>
+                          <th style="width: 150px;" ></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let convocatory of convocatories" >
+
+                          <td>{{convocatory.fecha_invitacion | date}}</td>
+                          <td>{{convocatory.titulo}}</td>
+                          <td>{{convocatory.correo}}</td>
+                          <td>{{convocatory.estado}}</td>
+
+                         <td>
+
+
+                              <button [routerLink]="['/convocatory',convocatory._id]" class="btn btn-primary m-r-10"  > <i class="fa fa-pencil"></i> </button>
+                              <button (click)="deleteConvocatory(convocatory)" class="btn btn-warning"  > <i class="fa fa-close"></i> </button>
+
+                          </td>
+                      </tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="4" ><strong>Registros </strong>  5 de {{total}} </td>
+                          <td colspan="1" class="text-center" >
+                              <button (click)="changePagination(-5)" class="btn btn-xs btn-secondary m-r-10" >
+                                  <i class="fa fa-chevron-left" ></i>
+                              </button>
+
+                              <button (click)="changePagination(5)" class="btn btn-xs btn-secondary" >
+                                  <i class="fa fa-chevron-right" ></i>
+                              </button>
+                          </td>
+                      </tr>
+                  </tfoot>
+
+              </table>
+
+          </div>
+      </div>
+  </div>
+</div>
