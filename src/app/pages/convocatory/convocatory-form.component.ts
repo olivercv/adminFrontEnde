@@ -19,7 +19,7 @@ export class ConvocatoryFormComponent implements OnInit {
   convocatory: Convocatory = new Convocatory("","",new Date(),new Date(),new Date(),new Date(),"","");
   doc: Doc = new Doc("","","","","","");
   docs: Doc [] = [];
-
+  documents: Doc [] = [];
   iconFile = '../assets/images/icon/file.png';
   constructor(
     public _convocatoryService: ConvocatoryService,
@@ -96,7 +96,8 @@ export class ConvocatoryFormComponent implements OnInit {
 guardarDocumento( doc: Doc) {
 
   this._convocatoryService.actualizarDoc( doc )
-          .subscribe();
+          .subscribe( //() => this.cargarDocs()
+          );
 
 }
 
@@ -109,7 +110,21 @@ deleteDoc( doc: Doc ) {
 
 cargarDocs() {
   this._convocatoryService.cargarDocs()
-          .subscribe( docs => this.docs = docs );
+          .subscribe( docs => {
+            this.docs = docs;
+            this.filtrarDocs();
+          });
+}
+
+filtrarDocs(){
+  this.documents = [];
+  this.docs.forEach(document => {
+
+    if (document.convocatory === this.convocatory._id ) {
+      this.documents.push(document);
+    }
+
+  });
 }
 
 changeFile(id: string) {
@@ -118,18 +133,20 @@ changeFile(id: string) {
 
   this.modalUploadFileService.modalNotification
               .subscribe( (resp: any) => {
-                // console.log(resp);
+                //console.log('doc archivo',resp);
+                this.cargarDocs();
                 this.changeIcon(resp.doc.sfile);
               });
 }
 
 changeIcon(sfile) {
 
-  if (sfile == undefined) {
+  if (!sfile) {
+    this.iconFile = '../assets/images/icon/add-file.png';
     return;
   }
   const ext = sfile.split('.');
-  // console.log('extencion', ext);
+  //console.log('extencion', ext);
 
   if (ext[1] === 'pdf') {
     this.iconFile = '../assets/images/icon/pdf.png';
@@ -139,7 +156,7 @@ changeIcon(sfile) {
     this.iconFile = '../assets/images/icon/doc.png';
   }
 
-  if (ext[1] === 'xls' || ext[1] === 'xlsx') {
+  if (ext[1] === 'xls' || ext[1] === 'xlsx' || ext[1] === 'csv') {
     this.iconFile = '../assets/images/icon/xls.png';
   }
 

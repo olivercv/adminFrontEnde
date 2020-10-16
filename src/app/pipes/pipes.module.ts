@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { ImagePipe } from './image.pipe';
 import { MenuPipe } from './menu.pipe';
+import { DocumentsConvocatoryPipe } from './documents-convocatory.pipe';
 
 @NgModule({
   imports: [],
   declarations: [
     ImagePipe,
-    MenuPipe
+    MenuPipe,
+    DocumentsConvocatoryPipe
   ],
   exports: [
     ImagePipe,
-    MenuPipe
+    MenuPipe,
+    DocumentsConvocatoryPipe
   ]
 })
 export class PipesModule { }
