@@ -48,7 +48,7 @@ export class ConvocatoryFormComponent implements OnInit {
 
             console.log( convocatory );
             this.convocatory = convocatory;
-
+            this.docs = convocatory.docs;
           });
   }
 
@@ -86,8 +86,8 @@ export class ConvocatoryFormComponent implements OnInit {
 
               this.doc._id = doc._id;
 
-              this.cargarDocs();
-              this.router.navigate(['/convocatory', doc.convocatory ]);
+              this.cargarConvocatory(this.convocatory._id);
+
 
             });
 
@@ -97,6 +97,7 @@ guardarDocumento( doc: Doc) {
 
   this._convocatoryService.actualizarDoc( doc )
           .subscribe( //() => this.cargarDocs()
+
           );
 
 }
@@ -104,7 +105,7 @@ guardarDocumento( doc: Doc) {
 deleteDoc( doc: Doc ) {
 
   this._convocatoryService.deleteDoc( doc._id )
-          .subscribe ( () => this.cargarDocs() );
+          .subscribe ( () => this.cargarConvocatory(this.convocatory._id) );
 
 }
 
@@ -134,7 +135,7 @@ changeFile(id: string) {
   this.modalUploadFileService.modalNotification
               .subscribe( (resp: any) => {
                 //console.log('doc archivo',resp);
-                this.cargarDocs();
+                this.cargarConvocatory(this.convocatory._id);
                 this.changeIcon(resp.doc.sfile);
               });
 }
