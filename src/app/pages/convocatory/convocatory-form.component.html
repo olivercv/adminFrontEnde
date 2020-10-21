@@ -10,6 +10,12 @@
               <div class="col-sm-12 col-xs-12">
                   <form #f="ngForm" ngNativeValidate  (ngSubmit)="guardarConvocatory(f)" >
                     <div class="form-group">
+                        <label>Codigo del proceso</label>
+                        <input [(ngModel)]="convocatory.correo" name="correo" type="text" class="form-control" placeholder="">
+                        <small class="form-control-feedback"> Código del proceso asociado a la Convocatoria </small>
+                    </div>
+
+                    <div class="form-group">
                       <label class="control-label">Objeto</label>
                       <input [(ngModel)]="convocatory.titulo" name="titulo" type="text" class="form-control" placeholder="Convocatoria">
                       <small class="form-control-feedback"> Titulo de la convocatoria </small>
@@ -70,11 +76,11 @@
                       </div>
                       <!--/span-->
                       <div class="col-sm">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label>Correo</label>
                           <input [(ngModel)]="convocatory.correo" name="correo" type="text" class="form-control" placeholder="">
                           <small class="form-control-feedback"> Correo Asociado a la Convocatoria </small>
-                        </div>
+                        </div> -->
                       </div>
                       <!--/span-->
                     </div>
