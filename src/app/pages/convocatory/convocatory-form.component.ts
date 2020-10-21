@@ -79,7 +79,7 @@ export class ConvocatoryFormComponent implements OnInit {
     this.doc.convocatory = id;
     console.log(this.doc);
     if (!id) {
-      return;
+      this.router.navigate(["/convocatory", this.convocatory._id]);
     }
 
     this._convocatoryService.guardarDoc(this.doc).subscribe((doc) => {
