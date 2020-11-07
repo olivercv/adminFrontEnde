@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { map } from 'rxjs/operators';
 import { UserService } from '../service.index';
 import { Category } from '../../models/category.model';
+import { SnackService } from '../snack.service';
 
 
 @Injectable({
@@ -18,7 +19,11 @@ export class CategoryService {
   user: User;
   public url: string;
 
-  constructor( public http: HttpClient,  public userService: UserService ) {
+  constructor(
+    public http: HttpClient,
+    public userService: UserService,
+    private snackService: SnackService,
+     ) {
     this.url = GLOBAL.urlServices;
    }
 
@@ -47,7 +52,7 @@ export class CategoryService {
     uri += '?token=' + this.userService.token;
     return this.http.delete( uri ).pipe(
       map( resp => {
-        alert('Categoría Borrada');
+        this.snackService.warn('Se ha borrado correctamente la categoria');
         return resp;
       })
     );
@@ -71,7 +76,7 @@ export class CategoryService {
 
       return this.http.put( uri, category ).pipe(
               map( ( resp: any ) => {
-                alert('La categoría se actualizó correctamente' + category.name);
+                this.snackService.success('Se ha actualizado correctamente la categoria ' + category.name);
                 return resp.category;
 
               })
@@ -82,7 +87,7 @@ export class CategoryService {
       uri += '?token=' + this.userService.token;
       return this.http.post( uri, category).pipe(
           map( (resp: any) => {
-            alert('Se ha creado una categoría');
+            this.snackService.success('Se ha creado correctamente la categoria ');
             return resp.category;
           })
       );

@@ -5,6 +5,7 @@ import { GLOBAL } from '../global.service';
 import { map } from 'rxjs/operators';
 import { Convocatory } from '../../models/convocatory.model';
 import { Doc } from '../../models/doc.model';
+import { SnackService } from '../snack.service';
 
 
 @Injectable({
@@ -16,8 +17,8 @@ export class ConvocatoryService {
   public url: string;
   constructor(
   public http: HttpClient,
-  public router: Router
-
+  public router: Router,
+  private snackService: SnackService,
   ) {
     this.url = GLOBAL.urlServices;
   }
@@ -59,7 +60,7 @@ export class ConvocatoryService {
 
     return this.http.delete( uri ).pipe(
       map( resp => {
-        alert('Convocatoria Borrada');
+        this.snackService.warn('Se ha borrado correctamente la convocatoria');
         return resp;
       })
     );
@@ -75,7 +76,7 @@ export class ConvocatoryService {
 
       return this.http.put( uri, convocatory ).pipe(
                 map( (resp: any) => {
-                  alert('La publicación se actualizó correctamente' + convocatory.titulo);
+                  this.snackService.success('Se ha actualizado correctamente la convocatoria ' + convocatory.titulo);
                   return resp.convocatory;
 
                 })
@@ -86,7 +87,7 @@ export class ConvocatoryService {
 
       return this.http.post( uri, convocatory ).pipe(
               map( (resp: any) => {
-                alert('Convocatoria Creada' + convocatory.titulo);
+                this.snackService.success('Se ha creado correctamente la convocatoria ' + convocatory.titulo);
                 return resp.convocatory;
               }));
     }
@@ -104,7 +105,7 @@ export class ConvocatoryService {
 
       return this.http.post( uri, doc ).pipe(
               map( (resp: any) => {
-                alert('Documento Creado' + doc.titulo);
+                this.snackService.success('Se ha creado correctamente el documento ' + doc.titulo);
                 return resp.doc;
               }));
 
@@ -122,7 +123,7 @@ export class ConvocatoryService {
     return this.http.put( uri, doc ).pipe(
               map( (resp: any) => {
 
-                alert('Documento Actualizado' + doc.titulo);
+                this.snackService.success('Se ha actualizado correctamente el documento ' + doc.titulo);
                 return resp.doc;
               }));
 
@@ -134,7 +135,7 @@ export class ConvocatoryService {
 
     return this.http.delete( uri ).pipe(
       map( resp => {
-        alert('Documento Borrado');
+        this.snackService.warn('Se ha borrado correctamente el documento');
         return resp;
       })
     );

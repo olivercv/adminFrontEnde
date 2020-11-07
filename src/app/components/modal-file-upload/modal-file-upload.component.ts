@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Doc } from 'src/app/models/doc.model';
+import { ConvocatoryService } from 'src/app/services/service.index';
+import { SnackService } from 'src/app/services/snack.service';
 import { UploadFileService } from '../../services/upload-file/upload-file.service';
 import { ModalFileUploadService } from './modal-file-upload.service';
 
@@ -13,22 +17,24 @@ export class ModalFileUploadComponent implements OnInit {
 
   fileUpload: File;
   iconFile = '../assets/images/icon/file.png';
-
+  convocatoryId: string;
+  doc: Doc = new Doc("", "", "", "", "", "");
   constructor(
     public uploadFileService: UploadFileService,
-    public modalUploadFileService: ModalFileUploadService
+    private dialogRef: MatDialogRef<ModalFileUploadComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ModalFileUploadComponent,
+    private _convocatoryService: ConvocatoryService,
+    private snackService: SnackService,
   ) { }
 
   ngOnInit(): void {
+
   }
 
-  closeModal() {
-    this.iconFile = '../assets/images/icon/file.png';
+  onCloseDialog(){
     this.fileUpload = null;
-    this.modalUploadFileService.hideModal();
-
+    this.dialogRef.close();
   }
-
   selectFile( file: File ) {
 
      console.log('archivo', file);
@@ -60,18 +66,30 @@ export class ModalFileUploadComponent implements OnInit {
 
   }
 
-  uploadFile() {
+  guardarDoc() {
 
-    this.uploadFileService.uploadArch(this.fileUpload, this.modalUploadFileService.type, this.modalUploadFileService.id)
-            .then( resp => {
-              console.log( resp );
-              this.modalUploadFileService.modalNotification.emit( resp );
-              this.closeModal();
+    if (!this.data.convocatoryId) {
+      this.onCloseDialog;
+    }
+    else{
+      if (this.fileUpload.type.indexOf('pdf') > 0 || this.fileUpload.type.indexOf('excel') > 0 || this.fileUpload.type.indexOf('officedocument.spreadsheetml.sheet') > 0 || this.fileUpload.type.indexOf('csv') > 0 || this.fileUpload.type.indexOf('officedocument.wordprocessingml.document') > 0)
+      {
+        this.doc.titulo = "Nuevo Documento";
+        this.doc.convocatory = this.data.convocatoryId;
+        this._convocatoryService.guardarDoc(this.doc).subscribe(doc => {
 
-            })
-            .catch( err => {
-              console.log( 'Error en la carga del archivo ');
-            });
+          this.uploadFileService.uploadArch(this.fileUpload, 'docs', doc._id);
+          this.snackService.success('Se ha cargado correctamente el archivo ');
+
+        });
+      }
+      else{
+        this.snackService.warn('No se pudo cargar el archivo porque no es un tipo archivo valido ');
+      }
+
+
+    }
   }
+
 
 }

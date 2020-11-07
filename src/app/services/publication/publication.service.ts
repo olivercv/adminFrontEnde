@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user.model';
 import { map } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 import { Publication } from '../../models/publication.model';
+import { SnackService } from '../snack.service';
 
 
 @Injectable({
@@ -20,7 +21,12 @@ export class PublicationService {
   user: User;
   public url: string;
 
-  constructor( public http: HttpClient, public router: Router, public userService: UserService ) {
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    public userService: UserService,
+    private snackService: SnackService,
+     ) {
     this.url = GLOBAL.urlServices;
    }
 
@@ -61,7 +67,7 @@ export class PublicationService {
     uri += '?token=' + this.userService.token;
     return this.http.delete( uri ).pipe(
       map( resp => {
-        alert('Publicación Borrada');
+        this.snackService.warn('Se ha borrado correctamente la publicacion');
         return resp;
       })
     );
@@ -86,7 +92,7 @@ export class PublicationService {
 
       return this.http.put( uri, publication ).pipe(
               map( ( resp: any ) => {
-                alert('La publicación se actualizó correctamente' + publication.title);
+                this.snackService.success('Se ha actualizado correctamente la ' + publication.title);
                 return resp.publication;
 
               })
@@ -97,7 +103,7 @@ export class PublicationService {
       uri += '?token=' + this.userService.token;
       return this.http.post( uri, publication).pipe(
           map( (resp: any) => {
-            alert('Se ha creado una publicación');
+            this.snackService.success('Se ha creado correctamente la publicación');
             return resp.publication;
           })
       );

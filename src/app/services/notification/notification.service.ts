@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { map } from 'rxjs/operators';
 import { UserService } from '../service.index';
 import { Notification } from '../../models/notification.model';
+import { SnackService } from '../snack.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class NotificationService {
   user: User;
   public url: string;
 
-  constructor( public http: HttpClient,  public userService: UserService) {
+  constructor(
+    public http: HttpClient,
+    public userService: UserService,
+    private snackService: SnackService,
+    ) {
     this.url = GLOBAL.urlServices;
   }
 
@@ -47,7 +52,7 @@ export class NotificationService {
     uri += '?token=' + this.userService.token;
     return this.http.delete( uri ).pipe(
       map( resp => {
-        alert('Notificación Borrada');
+        this.snackService.warn('Se ha borrado correctamente la notificacion');
         return resp;
       })
     );
@@ -71,7 +76,7 @@ export class NotificationService {
 
       return this.http.put( uri, notification ).pipe(
               map( ( resp: any ) => {
-                alert('La notiificación se actualizó correctamente' + notification.title);
+                this.snackService.success('Se ha actualizado correctamente la notificacion ' + notification.title);
                 return resp.notification;
 
               })
@@ -82,7 +87,7 @@ export class NotificationService {
       uri += '?token=' + this.userService.token;
       return this.http.post( uri, notification).pipe(
           map( (resp: any) => {
-            alert('Se ha creado una notificación');
+            this.snackService.success('Se ha creado correctamente la notificación');
             return resp.notification;
           })
       );
