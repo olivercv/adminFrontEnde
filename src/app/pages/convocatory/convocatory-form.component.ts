@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ModalFileUploadService } from "../../components/modal-file-upload/modal-file-upload.service";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { NgForm } from "@angular/forms";
 import { ModalFileUploadComponent } from "../../components/modal-file-upload/modal-file-upload.component";
 import { Convocatory } from "../../models/convocatory.model";
@@ -50,16 +50,14 @@ export class ConvocatoryFormComponent implements OnInit {
 
   cargarConvocatory(id: string) {
     this._convocatoryService.cargarConvocatory(id).subscribe((convocatory) => {
-      console.log(convocatory);
+
       this.convocatory = convocatory;
       this.documents = convocatory.docs;
-      console.log(this.documents);
+
     });
   }
 
   guardarConvocatory(f: NgForm) {
-    console.log(f.valid);
-    console.log(f.value);
 
     if (f.invalid) {
       return;
@@ -74,20 +72,21 @@ export class ConvocatoryFormComponent implements OnInit {
       });
   }
 
-  guardarDoc(id: string) {
-    this.doc.titulo = "Nuevo Documento";
-    this.doc.convocatory = id;
-    console.log(this.doc);
-    if (!id) {
-      this.router.navigate(["/convocatory", this.convocatory._id]);
+  guardarDoc() {
+
+    if (!this.convocatory._id) {
+      this.router.navigate(["/convocatory"]);
     }
+    else{
 
-    this._convocatoryService.guardarDoc(this.doc).subscribe((doc) => {
-      this.doc._id = doc._id;
+      this.doc.titulo = "Nuevo Documento";
+      this.doc.convocatory = this.convocatory._id;
+      this._convocatoryService.guardarDoc(this.doc).subscribe(() => {
+        this.cargarConvocatory(this.convocatory._id);
+        this.router.navigate(['/convocatory', this.convocatory._id ]);
 
-      this.cargarConvocatory(this.convocatory._id);
-      //this.router.navigate(['/convocatory', this.convocatory._id ]);
-    });
+      });
+    }
   }
 
   guardarDocumento(doc: Doc) {
@@ -100,6 +99,17 @@ export class ConvocatoryFormComponent implements OnInit {
     this._convocatoryService
       .deleteDoc(doc._id)
       .subscribe(() => this.cargarConvocatory(this.convocatory._id));
+  }
+
+  openFileUploadDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '40%';
+    dialogConfig.data = {convocatoryId: this.convocatory._id};
+    const documentDialogRef = this.dialog.open(ModalFileUploadComponent, dialogConfig);
+    documentDialogRef.afterClosed().subscribe( result => {
+      this.cargarConvocatory(this.convocatory._id);
+    });
+
   }
 
   changeFile(id: string) {
