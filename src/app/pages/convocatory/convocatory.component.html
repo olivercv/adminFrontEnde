@@ -2,7 +2,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-body">
-              <input #input (keyup)="searchConvocatory(input.value)" type="text" class="form-control" placeholder="Buscar Publicación ..." >
+              <input [(ngModel)]="filterConv" type="text" class="form-control" placeholder="Buscar Publicación ..." >
           </div>
       </div>
   </div>
@@ -36,8 +36,6 @@
                   </button>
               </div>
 
-
-
               <table class="table m-t-20  table-striped table-hover contact-list footable-loaded footable color-table inverse-table" >
                   <thead>
                       <tr>
@@ -50,7 +48,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let convocatory of convocatories" >
+                      <tr *ngFor="let convocatory of convocatories | convFilter : filterConv" >
 
                           <td>{{convocatory.fecha_invitacion | date}}</td>
                           <td>{{convocatory.titulo}}</td>
@@ -68,7 +66,7 @@
                   </tbody>
                   <tfoot>
                       <tr>
-                          <td colspan="4" ><strong>Registros </strong>  5 de {{total}} </td>
+                          <td colspan="4" ><strong>Registros </strong>  {{to}} de {{total/to}} </td>
                           <td colspan="1" class="text-center" >
                               <button (click)="changePagination(-5)" class="btn btn-xs btn-secondary m-r-10" >
                                   <i class="fa fa-chevron-left" ></i>

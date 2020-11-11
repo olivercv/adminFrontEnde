@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Convocatory } from '../../models/convocatory.model';
 import { ConvocatoryService } from '../../services/service.index';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -10,9 +11,10 @@ import { ConvocatoryService } from '../../services/service.index';
 })
 export class ConvocatoryComponent implements OnInit {
 
-  convocatories: Convocatory[]=[];
+  convocatories: Convocatory[] = [];
+  filterConv: string;
   loading = true;
-  total=0;
+  total = 0;
   to = 0;
   constructor(
     public _convocatory: ConvocatoryService
